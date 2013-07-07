@@ -47,7 +47,7 @@ public class LoadJSON : MonoBehaviour {
 			switch(SwitchMag) {
 				
 			case 0:
-				ValuesMag=4.5f;
+				ValuesMag=4.5f; 
 				button (ValuesMag,exmax,0);
 				break;	
 				
