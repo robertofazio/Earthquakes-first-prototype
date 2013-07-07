@@ -14,30 +14,20 @@ public class LoadJSON : MonoBehaviour {
 	public string UTCtime;
 	public int Mode ; // 1 parte all_hour 2 parte all_month e poi a seguire 1
 	public int numMaxInstanceEq;
-	
 	public GameObject[] All_Earthquakes; 
 	public GameObject Selector;
 	public Vector3 outCart;
-
 	public int exmax; // max execute 
 	public int SwitchMag;
 	public float ValuesMag = 4.5f;
 	public bool SwitchDescriptions;
-
 	public string globString;
-	
 	public TextMesh[] ArrayTextAll;
 	public TextMesh TextSelector2;
-	
-
-	
 	public float textRad = 8;
-
-
-		
+	
 	void Start () {	
 		
-			
 		if(Mode == 1 ) {
 			Debug.Log("reading all_hour json... Updated every 60sec.");
 			StartCoroutine("loadjson_allhour" , 5.0F);
@@ -114,7 +104,6 @@ public void ProcessFeatures(string jsonString) {
 	
 		features = new Features(); 
 		features.Properties = new ArrayList();
-	//	Debug.Log(jsonFeatures["features"][0]["properties"]["place"].ToString());
 		features.place = jsonFeatures["features"][0]["properties"]["place"].ToString();
 		features.mag = jsonFeatures["features"][0]["properties"]["mag"].ToString();
 		features.mag1 = Convert.ToDouble(features.mag);
@@ -126,7 +115,6 @@ public void ProcessFeatures(string jsonString) {
 		features.longitude1 = Convert.ToDouble(features.longitude);
 		features.depth = jsonFeatures["features"][0]["geometry"]["coordinates"][2].ToString();
 		features.depth1 = Convert.ToDouble(features.depth);
-		//Debug.Log("--Place:"+features.place +"--Mag: " +features.mag1 +"--Time:"+features.time1 + "--Coordinates: "+features.latitude1 +" , " +features.longitude1 + "Depth: "+features.depth1);
 		UTCtime = new DateTime(long.Parse(features.time)*10000).AddYears(1969).ToString("yyyy-MM-dd hh:mm:ss");
 	}
 	
@@ -135,8 +123,9 @@ public IEnumerator loadjson_allmonth(float waitTime) {
 		
 		yield return new WaitForSeconds(waitTime);
 		Debug.Log("Start call to loadjson_allmonth only one time. Wating...");
-        WWW www = new WWW("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson");
-		// Start();
+//        WWW www = new WWW("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson");
+		WWW www = new WWW("file:///Users/robertofazio/Desktop/all_month_local.geojson");
+		
         yield return www;
         if (www.error == null)
         {  
@@ -186,11 +175,11 @@ public IEnumerator loadjson_allmonth(float waitTime) {
 				if(All_Earthquakes[i].transform.localScale.x >= 0.0f && All_Earthquakes[i].transform.localScale.x <= 1.0f) {
 					All_Polygon.renderer.material.color = Color.green;
 				} 
-				if (All_Earthquakes[i].transform.localScale.x >= 1.0f && All_Earthquakes[i].transform.localScale.x <= 2.5f) {
+				if (All_Earthquakes[i].transform.localScale.x > 1.0f && All_Earthquakes[i].transform.localScale.x < 2.5f) {
 					//Color orange = new Color(1.0f, 0.6f, 0.0f, 1.0f);
 					All_Polygon.renderer.material.color = Color.yellow;
 				}
-				if (All_Earthquakes[i].transform.localScale.x >= 4.5f) {
+				if (All_Earthquakes[i].transform.localScale.x >= 2.5f) {
 					All_Polygon.renderer.material.color = Color.red;
 				}
 				
@@ -207,11 +196,8 @@ public IEnumerator loadjson_allmonth(float waitTime) {
 				ArrayTextAll[i] = myText2;
 							
 				ArrayTextAll[i].gameObject.SetActive(false);
-				
-				
 
 		}
-			
 
 			// Finita la mod 2 parte in automatico la 1 e la coroutine Start(); Grande mistero!
 			Mode = 1;
@@ -228,11 +214,7 @@ public static void SphericalToCartesian(float radius, float lon, float lat, floa
         outCart.z = a * Mathf.Sin(Mathf.Deg2Rad*(lon));
         outCart.y = radius * Mathf.Sin(Mathf.Deg2Rad*lat);// - (z1/6371* radius);		
 	}
-	
-
-
-
-			
+		
 void button(float ValuesMag,int exmax, int bcase) {
 			
 		for (int i=0; i <= exmax; i++) {

@@ -1,0 +1,69 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{EFB4DD77-857C-3770-0BAE-0FEB82FA7F47}") = "Earthquakes-first-prototype", "Assembly-CSharp-firstpass.csproj", "{40F83134-79A2-27B6-4387-CB4BFF2C916B}"
+EndProject
+Project("{EFB4DD77-857C-3770-0BAE-0FEB82FA7F47}") = "Earthquakes-first-prototype", "Assembly-CSharp.csproj", "{9F45ABA6-1507-2E5D-1801-D73D2ABE40D7}"
+EndProject
+Project("{EFB4DD77-857C-3770-0BAE-0FEB82FA7F47}") = "Earthquakes-first-prototype", "Assembly-CSharp-Editor.csproj", "{86D881D8-04C4-194F-A68A-8AACDFDFC7C1}"
+EndProject
+Project("{EFB4DD77-857C-3770-0BAE-0FEB82FA7F47}") = "Earthquakes-first-prototype", "Assembly-UnityScript-firstpass.unityproj", "{40D4FE8B-5820-B9F0-BE5F-B528B011EC3C}"
+EndProject
+Project("{EFB4DD77-857C-3770-0BAE-0FEB82FA7F47}") = "Earthquakes-first-prototype", "Assembly-UnityScript.unityproj", "{DE041F0C-FADB-8284-FD4A-92C0461C0D91}"
+EndProject
+Project("{EFB4DD77-857C-3770-0BAE-0FEB82FA7F47}") = "Earthquakes-first-prototype", "Assembly-UnityScript-Editor.unityproj", "{23A7E326-EFBB-8645-7F37-7EFC03960AD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40F83134-79A2-27B6-4387-CB4BFF2C916B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40F83134-79A2-27B6-4387-CB4BFF2C916B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40F83134-79A2-27B6-4387-CB4BFF2C916B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40F83134-79A2-27B6-4387-CB4BFF2C916B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F45ABA6-1507-2E5D-1801-D73D2ABE40D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F45ABA6-1507-2E5D-1801-D73D2ABE40D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F45ABA6-1507-2E5D-1801-D73D2ABE40D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F45ABA6-1507-2E5D-1801-D73D2ABE40D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86D881D8-04C4-194F-A68A-8AACDFDFC7C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86D881D8-04C4-194F-A68A-8AACDFDFC7C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86D881D8-04C4-194F-A68A-8AACDFDFC7C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86D881D8-04C4-194F-A68A-8AACDFDFC7C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40D4FE8B-5820-B9F0-BE5F-B528B011EC3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40D4FE8B-5820-B9F0-BE5F-B528B011EC3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40D4FE8B-5820-B9F0-BE5F-B528B011EC3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40D4FE8B-5820-B9F0-BE5F-B528B011EC3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE041F0C-FADB-8284-FD4A-92C0461C0D91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE041F0C-FADB-8284-FD4A-92C0461C0D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE041F0C-FADB-8284-FD4A-92C0461C0D91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE041F0C-FADB-8284-FD4A-92C0461C0D91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23A7E326-EFBB-8645-7F37-7EFC03960AD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23A7E326-EFBB-8645-7F37-7EFC03960AD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23A7E326-EFBB-8645-7F37-7EFC03960AD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23A7E326-EFBB-8645-7F37-7EFC03960AD7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+																			GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.inheritsSet = null
+		$1.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $2
+		$2.inheritsSet = Mono
+		$2.inheritsScope = text/x-csharp
+		$2.scope = text/x-csharp
+		$0.TextStylePolicy = $3
+		$3.FileWidth = 120
+		$3.TabWidth = 4
+		$3.EolMarker = Unix
+		$3.inheritsSet = Mono
+		$3.inheritsScope = text/plain
+		$3.scope = text/plain
+	EndGlobalSection
+
+EndGlobal

@@ -1,1 +1,2 @@
+Assets/Prefab/Tunnel_Rett.fbx
 Assets/Prefab/earthMap.fbx

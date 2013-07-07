@@ -11,7 +11,6 @@ public class Earthquakes : MonoBehaviour {
 	private GameObject tunnel;
 	public GameObject earthMap;
 	public GameObject SolarSystem;
-	//private GameObject SPECTATORPOV;
 	private GameObject PointLight2;
 	private GameObject DirectionLight;
 	private LoadJSON PropertiesFromJson;
@@ -44,10 +43,13 @@ public class Earthquakes : MonoBehaviour {
 	
 	void Awake () {
 	    
-		PropertiesFromJson = GetComponent<LoadJSON>(); // prelevo attraverso GetComponent le variabili che si trovano in LoadJson
+		PropertiesFromJson = GetComponent<LoadJSON>(); 
 		AudioSource[] sources;
 		sources = GetComponents<AudioSource>();
-		audio2 = sources[2];		 
+		audio2 = sources[2];	
+		ExplosionSpheres = GameObject.Find("HitFX_Ice");
+		ExplosionSpheres.SetActive(false);
+
 	}
 	
 	void Start () {
@@ -58,22 +60,17 @@ public class Earthquakes : MonoBehaviour {
 		DirectionLight = GameObject.Find("Directional light");
 		PointLight2 = GameObject.Find("Point light 2");
 		tunnel = GameObject.Find("TUNNEL8");
-		ExplosionSpheres = GameObject.Find("HitFX_Ice");
 		tunnel.SetActive(false);
 		earthMap = GameObject.Find("earthMap");
 		earthMap.SetActive(false);
 		SolarSystem = GameObject.Find("SolarSystem");
-		//SPECTATORPOV = GameObject.Find("SPECTATOR POV");
-		
 		ArrayTerremotiGameObject = new GameObject[numMaxTerremoti]; 
 		ArrayText = new TextMesh[numMaxTerremoti];
 	}
 	
 	void Update () {
 		
-
 		checkUpdateEQ();
-		
 		
 		if (PropertiesFromJson.features == null) {}
 		else {
@@ -82,8 +79,7 @@ public class Earthquakes : MonoBehaviour {
 		
 		DirectionLight.transform.Rotate(0, Time.deltaTime*10, 0, Space.Self);
 		tunnel.transform.Rotate(0, Time.deltaTime, 0, Space.Self);
-		SolarSystem.transform.Rotate(0,Time.deltaTime*-1 , 0, Space.Self);
-		
+		SolarSystem.transform.Rotate(0, Time.deltaTime , 0, Space.Self);
 		
 		if(cnt >= 0) {
 
@@ -94,9 +90,7 @@ public class Earthquakes : MonoBehaviour {
 					if (SwitchTextPasth == false) { 
 				        	ArrayText[i].gameObject.SetActive(false);
 					}
-					
-				
-					
+
 				}
 		}
 			if(SwitchPastHour == false) { 
@@ -105,11 +99,9 @@ public class Earthquakes : MonoBehaviour {
 					ArrayText[i].gameObject.SetActive(false); 
 					if (SwitchTextPasth == true) { 
 				        	ArrayText[i].gameObject.SetActive(true);
-					}
-					
+					}	
 					}
 				}
-				
 			}
 
 		if(Input.GetKeyDown("space")) {
@@ -168,8 +160,13 @@ public class Earthquakes : MonoBehaviour {
 			ArrayText[cnt] = myText;
 			ArrayText[cnt].gameObject.SetActive(true);
 			
+			GameObject newExpSphere = Instantiate(ExplosionSpheres, transform.localScale, Quaternion.identity) as GameObject;
+			newExpSphere.transform.parent = GameObject.Find("SolarSystem").transform;
+		    newExpSphere.transform.localScale = new Vector3((float)PropertiesFromJson.features.mag1 +1.0f, (float)PropertiesFromJson.features.mag1 +1.0f, (float)PropertiesFromJson.features.mag1 +1.0f); 
+			newExpSphere.transform.localRotation = Quaternion.identity;
+			newExpSphere.transform.localPosition = outCart;
+			newExpSphere.SetActive(true);
 
-			
 			audio2.Play();
 			trig = true; // manda il trig timer per animazione della durata di duration
 			
@@ -195,7 +192,6 @@ public class Earthquakes : MonoBehaviour {
    					duration -= Time.deltaTime;
 					tunnel.transform.position = tunnel.transform.position + UnityEngine.Random.insideUnitSphere * (float)PropertiesFromJson.features.mag1 *10;
 					PointLight2.transform.Translate(-Vector3.forward * Time.deltaTime*10);	
-					//SPECTATORPOV.transform.Translate(Vector3.forward *Time.deltaTime*20);
 					
  				}
 			
@@ -213,8 +209,6 @@ public class Earthquakes : MonoBehaviour {
 			Color color0 = Color.white; Color color1 = Color.blue;
 			float t = Mathf.PingPong(Time.time, duration) / duration;
 			PointLight2.light.color = Color.Lerp(color0, color1, t);
-		//	SPECTATORPOV.transform.Translate(-Vector3.forward *Time.deltaTime*20);
-
 		}	
 	}
 	
@@ -227,6 +221,7 @@ public static void SphericalToCartesian(float radius, float lon, float lat, floa
 	}
 		
  void OnGUI () {
+		
 		guiText.font = DIN;
 		// Solve NullReferenceException error
  	   if ( PropertiesFromJson.features == null) {}
@@ -235,7 +230,7 @@ public static void SphericalToCartesian(float radius, float lon, float lat, floa
 			GUI.Box(new Rect(5,5,400,200), "");
 			int cnt2 = cnt + 1;
 			//string cnt1 = cnt2.ToString();
-    		GUI.Label(new Rect(10,10,500,20), "Earthquakes detected since: "+DateTime.Now +" - num: "+cnt2.ToString());
+    		GUI.Label(new Rect(10,10,500,20), "Earthquakes detected since: "+DateTime.Now +" - num: "+cnt2.ToString() + " , Worldwide Earthquakes: "+PropertiesFromJson.numMaxInstanceEq);
    			GUI.Label(new Rect(10,25,500,20), "Place: "+ PropertiesFromJson.features.place); 
   	    	GUI.Label(new Rect(10,40,500,20), "UTC Time: "+PropertiesFromJson.UTCtime);
  	    	GUI.Label(new Rect(10,55,500,20), "Magnitude: "+ PropertiesFromJson.features.mag);
@@ -248,18 +243,14 @@ public static void SphericalToCartesian(float radius, float lon, float lat, floa
 			if(GUI.Button(new Rect(310,120,80,20), "ALL")) PropertiesFromJson.SwitchMag = 3;
 			if(GUI.Button(new Rect(310,140,80,20), "NONE")) PropertiesFromJson.SwitchMag = 4;
 
-				GUI.Label(new Rect(400,120,500,20), "Order Mag:" +PropertiesFromJson.ValuesMag);
+			GUI.Label(new Rect(400,120,500,20), "Order Mag:" +PropertiesFromJson.ValuesMag);
 				
 			if(GUI.Button(new Rect(10,150,80,20), "Details Eq")) PropertiesFromJson.SwitchDescriptions = ! PropertiesFromJson.SwitchDescriptions;
 			if(GUI.Button(new Rect(10,180,80,20), "Past Hour")) SwitchPastHour = ! SwitchPastHour;
 			if(GUI.Button(new Rect(10,210,80,20), "Viz")) SwitchTextPasth = ! SwitchTextPasth;
-				
-				
-		
+
 			}
 			}
 		}
-	
 
-	
 }
